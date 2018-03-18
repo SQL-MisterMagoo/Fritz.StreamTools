@@ -236,8 +236,8 @@ function googleFontsAdapter(setter) {
 }
 
 function setSupportedFonts(fonts) {
-	localStorage.setItem('supportedFonts', JSON.stringify(supportedFonts));
-	updateFontList(filterFontList(supportedFonts));
+	localStorage.setItem('supportedFonts', JSON.stringify(fonts));
+	updateFontList(filterFontList(fonts));
 }
 
 function setSupportedFontsFromApi(fonts) {
