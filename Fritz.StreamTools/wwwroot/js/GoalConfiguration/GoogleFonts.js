@@ -1,3 +1,43 @@
+$("#googleFontsList").keyup(function (e) {
+	if (e.keyCode === 13) {
+		$("#googleFontsList").hide();
+	}
+});
+$("#FontName").keyup(function (e) {
+	log("Hello:" + e.keyCode);
+	$("#googleFontsList").show();
+
+	switch (e.keyCode) {
+		case 40:
+			var index = $("#googleFontsList > option").slice($("#googleFontsList")[0].selectedIndex + 1).not("[disabled]").first().index();
+			$("#googleFontsList")[0].selectedIndex = index;
+			$("#googleFontsList").focus();
+			return;
+			break;
+		case 38:
+			var index = $("#googleFontsList > option").slice(0, $("#googleFontsList")[0].selectedIndex - 1).not("[disabled]").last().index();
+			$("#googleFontsList")[0].selectedIndex = index;
+			$("#googleFontsList").focus();
+			return;
+			break;
+		case 13:
+			$("#" + ConfigurationModel.FontName).val($("#googleFontsList").val());
+			$("#googleFontsList").hide();
+			return;
+		default:
+	}
+	$("#googleFontsList > option").attr("style", "display:none").prop("disabled", true);
+	$("#googleFontsList > option[value*='" + $("#FontName").val() + "']").removeAttr("style").prop("disabled", false);
+});
+document.getElementById('googleFontsList').onchange = function () {
+
+	document.getElementById(ConfigurationModel.FontName).value = this.value;
+
+	loadPreview();
+
+};
+
+/*
 var supportedFonts = [];
 
 function InitGoogleFonts() {
@@ -335,3 +375,4 @@ document.getElementById('fontNames').onchange = function () {
 	loadPreview();
 
 };
+*/

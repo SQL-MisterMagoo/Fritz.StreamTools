@@ -2,8 +2,6 @@ var isLoadingFromStorage = false;
 
 (function () {
 
-	document.getElementById('fontsPanel').style.display = 'none';
-
 	onload();
 
 	loadPreview();
@@ -19,15 +17,6 @@ var isLoadingFromStorage = false;
 		for (var i = 0; i < localStorage.length; i++) {
 			var key = localStorage.key(i);
 			const item = localStorage.getItem(key);
-
-			if (key === 'supportedFonts') {
-
-				log("setting supported fonts from local storage");
-				const fonts = JSON.parse(item);
-				setSupportedFonts(fonts);
-				continue;
-
-			}
 
 			log(key, item);
 
@@ -68,8 +57,6 @@ var isLoadingFromStorage = false;
 
 		}
 
-		InitGoogleFonts();
-
 		ConfigureDefaultFontColors();
 
 		$('[data-toggle="tooltip"]').tooltip();
@@ -93,8 +80,6 @@ function saveValues() {
 		localStorage.setItem(el.id, el.value);
 
 	}
-
-	localStorage.setItem('supportedFonts', JSON.stringify(supportedFonts));
 
 }
 

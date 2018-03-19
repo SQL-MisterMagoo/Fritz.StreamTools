@@ -22,11 +22,11 @@
 	<div class="col-md-6 mb-3">
 		<label asp-for="FontName"></label>
 		<input class="form-control" type="text" asp-for="FontName" />
-		<google-select id="googleFontsList" size="3"></google-select>
-		<div id="fontsPanel">
+		<google-select id="googleFontsList" size="3" class="form-control" style="display:none"></google-select>
+		<!--div id="fontsPanel">
 			<label for="fontname"></label> <select id="fontNames" size="5"></select>
 			<br />
-		</div>
+		</div -->
 	</div>
 </div>
 
@@ -116,27 +116,6 @@
 					}
 				};
 
-			$("#FontName").keyup(function (e) {
-				log("Hello:" + e.keyCode);
-				switch (e.keyCode) {
-					case 40:
-						var index = $("#googleFontsList > option").slice($("#googleFontsList")[0].selectedIndex + 1).not("[disabled]").first().index();
-						$("#googleFontsList")[0].selectedIndex = index;
-						return;
-						break;
-					case 38:
-						var index = $("#googleFontsList > option").slice(0, $("#googleFontsList")[0].selectedIndex - 1).not("[disabled]").last().index();
-						$("#googleFontsList")[0].selectedIndex = index;
-						return;
-						break;
-					case 13:
-						$("#" + ConfigurationModel.FontName).val($("#googleFontsList").val());
-						return;
-					default:
-				}
-				$("#googleFontsList > option").attr("style","display:none").prop("disabled",true);
-				$("#googleFontsList > option[value*='" + $("#FontName").val() + "']").removeAttr("style").prop("disabled",false);
-			});
 		</script>
 
 		<environment include="Development">

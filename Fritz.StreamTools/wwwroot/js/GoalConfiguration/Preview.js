@@ -25,11 +25,6 @@ function loadPreview() {
 	const iframeWidth = document.getElementById("widgetPreview").clientWidth - 40;
 	const fontName = document.getElementById(ConfigurationModel.FontName).value;
 
-	if (supportedFonts.length > 0 && filterFontList(supportedFonts, fontName, filterExactMatchOperation).length !== 1) {
-		alert('Font not supported by Google Fonts');
-		return;
-	}
-
 	var urlTemplate = "/followers/goal/";
 	urlTemplate += `${document.getElementById(ConfigurationModel.Goal).value}/`;
 	urlTemplate += `${document.getElementById(ConfigurationModel.Caption).value}`;

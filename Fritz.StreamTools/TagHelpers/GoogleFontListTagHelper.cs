@@ -60,6 +60,8 @@ namespace Fritz.StreamTools.TagHelpers
 			if (googleFonts != null) return;
 			var fontApi = new WebfontsService().Webfonts.List();
 			fontApi.Key = Config["GoogleFontsApi:Key"];
+			if (string.IsNullOrWhiteSpace(fontApi.Key))
+				return;
 			googleFonts = await fontApi.ExecuteAsync();
 
 		}
