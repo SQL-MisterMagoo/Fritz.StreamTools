@@ -17,16 +17,12 @@
 <div class="row">
 	<div class="col-md-6 mb-3">
 		<label asp-for="Caption"></label>
-		<input class="form-control" type="text" asp-for="Caption"  />
+		<input class="form-control" type="text" asp-for="Caption" />
 	</div>
-	<div class="col-md-6 mb-3">
+	<div class="col-md-6 mb-3" style="position:relative">
 		<label asp-for="FontName"></label>
 		<input class="form-control" type="text" asp-for="FontName" />
-		<google-select id="googleFontsList" size="3" class="form-control" style="display:none"></google-select>
-		<!--div id="fontsPanel">
-			<label for="fontname"></label> <select id="fontNames" size="5"></select>
-			<br />
-		</div -->
+		<google-fonts id="googleFontsList" class="form-control" size="4" request-type="select"></google-fonts>
 	</div>
 </div>
 
@@ -41,7 +37,7 @@
 	</div>
 </div>
 
-	
+
 <div class="row">
 	<div class="col-md-4 mb-3 form-inline">
 		<label asp-for="EmptyBackgroundColor"></label>
@@ -58,7 +54,7 @@
 		<label asp-for="FillFontColor"></label>
 		&nbsp;
 		<input type="color" asp-for="FillFontColor" />
-		<a href="#" id="defaultFillFontColor" data-target="@nameof(Model.FillFontColor)" data-background="bgcolor1" data-toggle="tooltip" data-placement="top" title="Choose a default color for maximum contrast"><i class="fas fa-adjust" ></i></a>
+		<a href="#" id="defaultFillFontColor" data-target="@nameof(Model.FillFontColor)" data-background="bgcolor1" data-toggle="tooltip" data-placement="top" title="Choose a default color for maximum contrast"><i class="fas fa-adjust"></i></a>
 	</div>
 </div>
 
@@ -94,8 +90,8 @@
 </div>
 
 @section scripts {
-		<script>
-			const GoogleFontsApiKey = '@ViewBag.GoogleFontsApiKey';	
+	<script>
+			const GoogleFontsApiKey = '@ViewBag.GoogleFontsApiKey';
 
 			const ConfigurationModel = {
 				Caption: "@nameof(Model.Caption)",
@@ -116,22 +112,24 @@
 					}
 				};
 
-		</script>
+	</script>
 
-		<environment include="Development">
-			<script src="~/js/GoalConfiguration/GoogleFonts.js"></script>
-			<script src="~/js/GoalConfiguration/Preview.js"></script>
-			<script src="~/js/GoalConfiguration/GoalConfiguration.js"></script>
-		</environment>
-		<environment exclude="Development">
-			<script src="/js/GoalConfiguration.min.js" asp-append-version="true"></script>
-		</environment>
-	}
+	<environment include="Development">
+		<script src="~/js/GoalConfiguration/GoogleFonts.js"></script>
+		<script src="~/js/GoalConfiguration/Preview.js"></script>
+		<script src="~/js/GoalConfiguration/GoalConfiguration.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="/js/GoalConfiguration.min.js" asp-append-version="true"></script>
+	</environment>
+}
 
 @section styles {
 	<style>
 
-		label:after {content: ":"}
+		label:after {
+			content: ":"
+		}
 
 		#defaultFillFontColor, #defaultEmptyFontColor {
 			display: block;
@@ -141,5 +139,17 @@
 			background-color: inherit;
 			color: inherit;
 		}
+
+		#googleFontsList {
+			display:none;
+			position: absolute;
+			z-index: 9;
+		}
 	</style>
+}
+
+@section googlefonts {
+	<cache>
+		<google-fonts request-type="links"></google-fonts>
+	</cache>
 }

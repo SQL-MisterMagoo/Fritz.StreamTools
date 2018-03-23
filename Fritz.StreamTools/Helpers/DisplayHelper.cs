@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Google.Apis.Webfonts.v1.Data;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,5 +67,21 @@ namespace Fritz.StreamTools.Helpers
             return result.ToString();
         }
 
-    }
+			public static IHtmlContent GenerateGoogleFontLink(Webfont font)
+		{
+			var output = new TagBuilder("link");
+			output.Attributes.Add("rel", "stylesheet");
+			output.Attributes.Add("href", $"https://fonts.googleapis.com/css?family={font.Family}:{font.Variants[0]}");
+			return output;
+		}
+
+		public static IHtmlContent GenerateGoogleFontSelectOption(Webfont font)
+		{
+			var tb = new TagBuilder("option");
+			tb.MergeAttribute("value", font.Family);
+			tb.MergeAttribute("style", $"font-family:{font.Family}");
+			tb.InnerHtml.Append(font.Family);
+			return tb;
+		}
+	}
 }
