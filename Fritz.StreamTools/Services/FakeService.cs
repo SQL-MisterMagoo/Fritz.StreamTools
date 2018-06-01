@@ -38,7 +38,7 @@ namespace Fritz.StreamTools.Services
 
 		public int CurrentViewerCount => _numberOfViewers;
 
-		public TimeSpan? Uptime => null;
+		public ValueTask<TimeSpan?> Uptime() => new ValueTask<TimeSpan?>((TimeSpan?)null);
 
 		public event EventHandler<ServiceUpdatedEventArgs> Updated;
 
@@ -132,15 +132,9 @@ namespace Fritz.StreamTools.Services
 
 			Logger.LogInformation($"Stopping monitoring Fake with {CurrentFollowerCount} followers and {CurrentViewerCount} Viewers");
 
-			if (_updateViewers != null)
-			{
-				_updateViewers.Dispose();
-			}
-
-			if (_updateFollowers != null)
-			{
-				_updateFollowers.Dispose();
-			}
+  		(_updateViewers as IDisposable)?.Dispose();
+			
+			_updateFollowers?.Dispose();
 
 			return Task.CompletedTask;
 
